@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Ionic-Form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-card color="light mt-5" scroll-y="true" style="overflow: scroll">
+  <ion-card-header class="mx-auto fs-5 text-center"> Sign-up </ion-card-header>
+  <ion-card-content>
+    <form action="">
+      <ion-item lines="full" class="mb-2">
+        <ion-label position="floating"> Enter your name </ion-label>
+        <ion-input type="text" placeholder="John" required></ion-input>
+      </ion-item>
+
+      <ion-item lines="full" class="mb-2">
+        <ion-label position="floating">Enter your Gender</ion-label>
+        <ion-select placeholder="Select" required>
+          <ion-select-option value="Male">Male</ion-select-option>
+          <ion-select-option value="Male">Female</ion-select-option>
+          <ion-select-option value="Male">Others</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="full" class="mb-2">
+        <ion-label class="" position="stacked"> Date of birth </ion-label>
+        <ion-input type="date" required></ion-input>
+      </ion-item>
+
+      <ion-item lines="full" class="mb-2">
+        <ion-label position="floating">
+          Enter your permanent address
+        </ion-label>
+        <ion-input
+          type="text"
+          placeholder="96, DIY Street"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item lines="full" class="mb-2">
+        <ion-label position="floating">
+          Enter your temporary address
+        </ion-label>
+        <ion-input
+          type="text"
+          placeholder="96, DIY Street"
+          [disabled]="isOK"
+          id="tempAddress"
+          required
+        ></ion-input>
+      </ion-item>
+      <div class="mb-3">
+        <ion-checkbox
+          type="checkbox"
+          class=""
+          [(ngModel)]="isOK"
+          [ngModelOptions]="{standalone: true}"
+          (ionChange)="emptyInput()"
+        ></ion-checkbox>
+
+        <ion-label class="ms-2 mt-0 mb-5">Same as permanent address</ion-label>
+      </div>
+      <ion-item lines="full" class="mb-2">
+        <ion-label position="floating"> Enter your skills </ion-label>
+        <ion-input
+          (keyup.enter)="addingSkills($event)"
+          id="skills1"
+          required
+        ></ion-input>
+        <p>{{skills}}</p>
+      </ion-item>
+      <p style="text-align: right !important">
+        Press space-bar to add new skill
+      </p>
+    </form>
+  </ion-card-content>
+</ion-card>
+<ion-button
+  type="submit"
+  color="success"
+  expeand="block"
+  class="align-items-center mx-auto"
+>
+  Submit
+</ion-button>
+
+<ion-content> </ion-content>
