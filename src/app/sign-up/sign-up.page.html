@@ -17,15 +17,19 @@
         </div>
       </div>
     </div>
-    <form action="">
+    <form [formGroup]="form" (ngSubmit)="saveFormData()">
       <ion-item lines="full" class="mb-2 ionitem">
         <ion-label position="floating"> Enter your name </ion-label>
-        <ion-input type="text" placeholder="John" required></ion-input>
+        <ion-input
+          type="text"
+          placeholder="John"
+          formControlName="name"
+        ></ion-input>
       </ion-item>
 
       <ion-item lines="full" class="mb-2">
         <ion-label position="floating">Enter your Gender</ion-label>
-        <ion-select placeholder="Select" required>
+        <ion-select placeholder="Select" formControlName="gender">
           <ion-select-option value="Male">Male</ion-select-option>
           <ion-select-option value="Male">Female</ion-select-option>
           <ion-select-option value="Male">Others</ion-select-option>
@@ -34,7 +38,7 @@
 
       <ion-item lines="full" class="mb-2">
         <ion-label class="" position="stacked"> Date of birth </ion-label>
-        <ion-input type="date" required></ion-input>
+        <ion-input type="date" formControlName="dob"></ion-input>
       </ion-item>
 
       <ion-item lines="full" class="mb-2">
@@ -44,7 +48,7 @@
         <ion-input
           type="text"
           placeholder="96, DIY Street"
-          required
+          formControlName="permanentAddress"
         ></ion-input>
       </ion-item>
       <ion-item lines="full">
@@ -56,7 +60,7 @@
           placeholder="96, DIY Street"
           [disabled]="isOK"
           id="tempAddress"
-          required
+          formControlName="temporaryAddress"
         ></ion-input>
       </ion-item>
       <div class="mb-2 mt-2">
@@ -75,21 +79,21 @@
         <ion-input
           (keyup.enter)="addingSkills($event)"
           id="skills1"
-          required
+          formArrayName="skills"
         ></ion-input>
-        <p>{{skills}}</p>
+        <p *ngFor="let skill of skills">{{skill}}</p>
       </ion-item>
       <p style="text-align: right !important">Press ENTER to add new skill</p>
+      <ion-button
+        type="submit"
+        color="success"
+        expand="block"
+        class="align-items-center mx-5 mt-2 btn-center"
+      >
+        Submit
+      </ion-button>
     </form>
   </ion-card-content>
 </ion-card>
-<ion-button
-  type="submit"
-  color="success"
-  expeand="block"
-  class="align-items-center mx-auto"
->
-  Submit
-</ion-button>
 
 <ion-content> </ion-content>

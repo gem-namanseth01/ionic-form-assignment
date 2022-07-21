@@ -8,12 +8,16 @@ import { SignUpPageRoutingModule } from './sign-up-routing.module';
 
 import { SignUpPage } from './sign-up.page';
 
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SignUpPageRoutingModule
+    SignUpPageRoutingModule, ReactiveFormsModule
   ],
   declarations: [SignUpPage]
 })
