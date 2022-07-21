@@ -5,10 +5,20 @@
 </ion-header>
 
 <ion-card color="light mt-5" scroll-y="true" style="overflow: scroll">
-  <ion-card-header class="mx-auto fs-5 text-center"> Sign-up </ion-card-header>
+  <ion-card-header class="mx-auto fs-5 text-center text-decoration-underline">
+    <b>Registration</b>
+  </ion-card-header>
   <ion-card-content>
+    <div class="container mb-3">
+      <div class="outer mb-5">
+        <img src="{{photo}}" />
+        <div class="inner" (click)="openModal()">
+          <ion-icon name="camera" class="camera-icon"></ion-icon>
+        </div>
+      </div>
+    </div>
     <form action="">
-      <ion-item lines="full" class="mb-2">
+      <ion-item lines="full" class="mb-2 ionitem">
         <ion-label position="floating"> Enter your name </ion-label>
         <ion-input type="text" placeholder="John" required></ion-input>
       </ion-item>
@@ -37,7 +47,7 @@
           required
         ></ion-input>
       </ion-item>
-      <ion-item lines="full" class="mb-2">
+      <ion-item lines="full">
         <ion-label position="floating">
           Enter your temporary address
         </ion-label>
@@ -49,7 +59,7 @@
           required
         ></ion-input>
       </ion-item>
-      <div class="mb-3">
+      <div class="mb-2 mt-2">
         <ion-checkbox
           type="checkbox"
           class=""
@@ -69,9 +79,7 @@
         ></ion-input>
         <p>{{skills}}</p>
       </ion-item>
-      <p style="text-align: right !important">
-        Press space-bar to add new skill
-      </p>
+      <p style="text-align: right !important">Press ENTER to add new skill</p>
     </form>
   </ion-card-content>
 </ion-card>
