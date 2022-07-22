@@ -11,7 +11,7 @@
   <ion-card-content>
     <div class="container mb-3">
       <div class="outer mb-5">
-        <img src="{{photo}}" />
+        <img *ngIf="photo" src="{{photo}}" />
         <div class="inner" (click)="openModal()">
           <ion-icon name="camera" class="camera-icon"></ion-icon>
         </div>
@@ -19,8 +19,11 @@
     </div>
     <form [formGroup]="form" (ngSubmit)="saveFormData()">
       <ion-item lines="full" class="mb-2 ionitem">
-        <ion-label position="floating"> Enter your name </ion-label>
+        <ion-label color="dark" position="floating">
+          Enter your name
+        </ion-label>
         <ion-input
+          color="dark"
           type="text"
           placeholder="John"
           formControlName="name"
@@ -28,7 +31,9 @@
       </ion-item>
 
       <ion-item lines="full" class="mb-2">
-        <ion-label position="floating">Enter your Gender</ion-label>
+        <ion-label color="dark" position="floating"
+          >Enter your Gender</ion-label
+        >
         <ion-select placeholder="Select" formControlName="gender">
           <ion-select-option value="Male">Male</ion-select-option>
           <ion-select-option value="Male">Female</ion-select-option>
@@ -37,12 +42,14 @@
       </ion-item>
 
       <ion-item lines="full" class="mb-2">
-        <ion-label class="" position="stacked"> Date of birth </ion-label>
+        <ion-label color="dark" class="" position="stacked">
+          Date of birth
+        </ion-label>
         <ion-input type="date" formControlName="dob"></ion-input>
       </ion-item>
 
       <ion-item lines="full" class="mb-2">
-        <ion-label position="floating">
+        <ion-label color="dark" position="floating">
           Enter your permanent address
         </ion-label>
         <ion-input
@@ -52,7 +59,7 @@
         ></ion-input>
       </ion-item>
       <ion-item lines="full">
-        <ion-label position="floating">
+        <ion-label color="dark" position="floating">
           Enter your temporary address
         </ion-label>
         <ion-input
@@ -75,7 +82,9 @@
         <ion-label class="ms-2 mt-0 mb-5">Same as permanent address</ion-label>
       </div>
       <ion-item lines="full" class="mb-2">
-        <ion-label position="floating"> Enter your skills </ion-label>
+        <ion-label color="dark" position="floating">
+          Enter your skills
+        </ion-label>
         <ion-input
           (keyup.enter)="addingSkills($event)"
           id="skills1"
@@ -92,8 +101,37 @@
       >
         Submit
       </ion-button>
+      <ion-button (click)="dropTable()">Drop Database</ion-button>
     </form>
+    <ion-button (click)="showUsers()"> Show registered users </ion-button>
+
+    <!-- <ion-label>
+        <h2><strong>{{ user.name }}</strong></h2>
+        <p>{{ user.gender }}</p>
+        <p>{{ user.dob }}</p>
+        <p>{{ user.permanentAddress }}</p>
+        <p>{{ user.temporaryAddress}}</p>
+        <p *ngFor="let skill of user.skills">{{ skill }}</p>
+      </ion-label> -->
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>DOB</th>
+        <th>Permanent Address</th>
+        <th>Temporary Address</th>
+        <th>Skills</th>
+      </thead>
+      <tbody *ngFor="let user of db.users">
+        <tr>
+          <td>{{ user.name }}</td>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.dob }}</td>
+          <td>{{ user.permanentAddress }}</td>
+          <td>{{ user.temporaryAddress }}</td>
+          <td>{{ user.skills }}</td>
+        </tr>
+      </tbody>
+    </table>
   </ion-card-content>
 </ion-card>
-
-<ion-content> </ion-content>
