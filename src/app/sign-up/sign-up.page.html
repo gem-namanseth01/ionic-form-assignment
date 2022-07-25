@@ -4,66 +4,68 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-card color="light mt-5" scroll-y="true" style="overflow: scroll">
+<ion-card color="dark mt-5" scroll-y="true" style="overflow: scroll">
   <ion-card-header class="mx-auto fs-5 text-center text-decoration-underline">
     <b>Registration</b>
   </ion-card-header>
   <ion-card-content>
     <div class="container mb-3">
       <div class="outer mb-5">
-        <img *ngIf="photo" src="{{photo}}" />
+        <img class="outer" *ngIf="photo" src="{{photo}}" />
         <div class="inner" (click)="openModal()">
           <ion-icon name="camera" class="camera-icon"></ion-icon>
         </div>
       </div>
     </div>
-    <form [formGroup]="form" (ngSubmit)="saveFormData()">
-      <ion-item lines="full" class="mb-2 ionitem">
-        <ion-label color="dark" position="floating">
+    <form [formGroup]="form" (ngSubmit)="saveFormData(form)">
+      <ion-item lines="full" class="mb-2 ionitem" color="dark">
+        <ion-label color="light" position="floating">
           Enter your name
         </ion-label>
         <ion-input
-          color="dark"
+          color="light"
           type="text"
           placeholder="John"
           formControlName="name"
         ></ion-input>
       </ion-item>
 
-      <ion-item lines="full" class="mb-2">
-        <ion-label color="dark" position="floating"
+      <ion-item lines="full" color="dark" class="mb-2">
+        <ion-label color="light" position="floating"
           >Enter your Gender</ion-label
         >
         <ion-select placeholder="Select" formControlName="gender">
           <ion-select-option value="Male">Male</ion-select-option>
-          <ion-select-option value="Male">Female</ion-select-option>
-          <ion-select-option value="Male">Others</ion-select-option>
+          <ion-select-option value="Female">Female</ion-select-option>
+          <ion-select-option value="Others">Others</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item lines="full" class="mb-2">
-        <ion-label color="dark" class="" position="stacked">
+      <ion-item lines="full" color="dark" class="mb-2">
+        <ion-label color="light" class="" position="stacked">
           Date of birth
         </ion-label>
-        <ion-input type="date" formControlName="dob"></ion-input>
+        <ion-input type="date" color="light" formControlName="dob"></ion-input>
       </ion-item>
 
-      <ion-item lines="full" class="mb-2">
-        <ion-label color="dark" position="floating">
+      <ion-item lines="full" class="mb-2" color="dark">
+        <ion-label color="light" position="floating">
           Enter your permanent address
         </ion-label>
         <ion-input
           type="text"
+          color="light"
           placeholder="96, DIY Street"
           formControlName="permanentAddress"
         ></ion-input>
       </ion-item>
-      <ion-item lines="full">
-        <ion-label color="dark" position="floating">
+      <ion-item lines="full" color="dark">
+        <ion-label color="light" position="floating">
           Enter your temporary address
         </ion-label>
         <ion-input
           type="text"
+          color="light"
           placeholder="96, DIY Street"
           [disabled]="isOK"
           id="tempAddress"
@@ -81,17 +83,18 @@
 
         <ion-label class="ms-2 mt-0 mb-5">Same as permanent address</ion-label>
       </div>
-      <ion-item lines="full" class="mb-2">
-        <ion-label color="dark" position="floating">
+      <ion-item lines="full" color="dark" class="mb-2">
+        <ion-label color="light" position="floating">
           Enter your skills
         </ion-label>
         <ion-input
           (keyup.enter)="addingSkills($event)"
           id="skills1"
+          color="light"
           formArrayName="skills"
         ></ion-input>
-        <p *ngFor="let skill of skills">{{skill}}</p>
       </ion-item>
+      <p *ngFor="let skill of skills">{{skill}}</p>
       <p style="text-align: right !important">Press ENTER to add new skill</p>
       <ion-button
         type="submit"
@@ -101,10 +104,24 @@
       >
         Submit
       </ion-button>
-      <ion-button (click)="dropTable()">Drop Database</ion-button>
+      <ion-button
+        color="success"
+        expand="block"
+        class="align-items-center mx-5 mt-2 btn-center"
+        (click)="dropTable()"
+        >Drop Database</ion-button
+      >
     </form>
-    <ion-button (click)="showUsers()"> Show registered users </ion-button>
-
+    <ion-button
+      color="success"
+      expand="block"
+      class="align-items-center mx-5 mt-2 btn-center"
+      (click)="showUsers()"
+    >
+      Show registered users
+    </ion-button>
+    <br />
+    <br />
     <!-- <ion-label>
         <h2><strong>{{ user.name }}</strong></h2>
         <p>{{ user.gender }}</p>

@@ -29,6 +29,10 @@ export class SignUpPage implements OnInit {
     input1.value = '';
   }
 
+  resetForm() {
+    this.form.reset();
+    this.skills = [];
+  }
   constructor(
     public modalController: ModalController,
     public setImagePopup: SetimagePopupPage,
@@ -45,7 +49,7 @@ export class SignUpPage implements OnInit {
     });
   }
 
-  saveFormData() {
+  saveFormData(form: FormGroup) {
     this.submitted = true;
     if (this.form.invalid) {
       console.log('INVALID');
@@ -56,6 +60,7 @@ export class SignUpPage implements OnInit {
     alert('SUCCESS!!:- \n\n' + JSON.stringify(this.form.value, null, 5));
     //alert(this.skills);
     this.createUser();
+    this.resetForm();
   }
 
   async openModal() {
