@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { FormGroup, Validators } from '@angular/forms';
 import { SetimagePopupPage } from '../setimage-popup/setimage-popup.page';
 import { FormArray } from '@angular/forms';
-
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,62 +12,94 @@ import { FormArray } from '@angular/forms';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
-  isOK : any;
+  isOK: any;
   photo: string;
-  form : FormGroup;
+  form: FormGroup;
   submitted = false;
-  skills : string[] = [""];
-  addingSkills(event) { //formArray formControllName 
-    // this.skills += '[' + event.target.value + '], ';
+  skills: string[] = [];
+  addingSkills(event) {
+    //formArray formControllName
     this.skills.push(event.target.value);
-    var input1 = <HTMLInputElement>(document.getElementById('skills1'));
-    input1.value="";
+    var input1 = <HTMLInputElement>document.getElementById('skills1');
+    input1.value = '';
   }
 
   emptyInput() {
-    var input1 = <HTMLInputElement>(document.getElementById('tempAddress'));;
-    input1.value="";
+    var input1 = <HTMLInputElement>document.getElementById('tempAddress');
+    input1.value = '';
   }
 
-  constructor(public modalController : ModalController,
-    public setImagePopup : SetimagePopupPage,
-    public fb : FormBuilder) {
-      this.form = this.fb.group({
-        name: [null, [Validators.required, Validators.minLength(4)]],
-        gender: [null, Validators.required],
-        dob: [null, Validators.required],
-        permanentAddress: [null, Validators.required],
-        temporaryAddress: [null],
-        skills: this.fb.array([])
-      });
-    
-    }
+  constructor(
+    public modalController: ModalController,
+    public setImagePopup: SetimagePopupPage,
+    public fb: FormBuilder,
+    public db: DatabaseService
+  ) {
+    this.form = this.fb.group({
+      name: [null, [Validators.required, Validators.minLength(4)]],
+      gender: [null, Validators.required],
+      dob: [null, Validators.required],
+      permanentAddress: [null, Validators.required],
+      temporaryAddress: [null],
+      skills: this.fb.array([]),
+    });
+  }
 
-    saveFormData() {
-      this.submitted = true;
-      if(this.form.invalid) {
-        console.log("INVALID");
-        return;
-      }
-      console.log("success");
-      alert('SUCCESS!!:- \n\n' + JSON.stringify(this.form.value, null, 4));
+  saveFormData() {
+    this.submitted = true;
+    if (this.form.invalid) {
+      console.log('INVALID');
+      return;
     }
+    console.log('success');
+    this.form.value.skills = this.skills;
+    alert('SUCCESS!!:- \n\n' + JSON.stringify(this.form.value, null, 5));
+    //alert(this.skills);
+    this.createUser();
+  }
 
   async openModal() {
     const modal = await this.modalController.create({
       component: SetimagePopupPage,
       componentProps: {
-        "name": "Form",
-        "type": "modal"
-      }, 
-      cssClass: 'modal-css'
+        name: 'Form',
+        type: 'modal',
+      },
+      cssClass: 'modal-css',
     });
     return await modal.present();
   }
 
-
-  ngOnInit() {
-    this.photo = 'https://i.pravatar.cc/150';
+  showUsers() {
+    this.db.getAllusers();
   }
 
+  createUser() {
+    console.log(
+      this.form.value.name,
+      this.form.value.gender,
+      this.form.value.permanentAddress,
+      this.form.value.temporaryAddress,
+      this.form.value.skills
+    );
+    this.db.addItem(
+      this.form.value.name,
+      this.form.value.gender,
+      this.form.value.dob,
+      this.form.value.permanentAddress,
+      this.form.value.temporaryAddress,
+      this.form.value.skills
+    );
+  }
+
+  dropTable() {
+    this.db.dropDatabase();
+  }
+
+  ngOnInit() {
+    setInterval(() => {
+      console.log('running');
+      this.photo = this.db.getImg();
+    }, 4000);
+  }
 }
