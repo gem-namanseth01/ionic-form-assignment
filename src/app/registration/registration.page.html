@@ -94,8 +94,9 @@
           color="light"
           formArrayName="skills"
         ></ion-input>
+        <p *ngFor="let skill of skills">{{skill}}</p>
       </ion-item>
-      <p *ngFor="let skill of skills">{{skill}}</p>
+
       <p style="text-align: right !important">Press ENTER to add new skill</p>
       <ion-button
         type="submit"
