@@ -2,21 +2,44 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { FormGroup, Validators } from '@angular/forms';
-import { SetimagePopupPage } from '../setimage-popup/setimage-popup.page';
 import { FormArray } from '@angular/forms';
 import { DatabaseService } from '../database.service';
+import { PopupPage } from '../popup/popup.page';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.page.html',
-  styleUrls: ['./sign-up.page.scss'],
+  selector: 'app-registration',
+  templateUrl: './registration.page.html',
+  styleUrls: ['./registration.page.scss'],
 })
-export class SignUpPage implements OnInit {
+export class RegistrationPage implements OnInit {
   isOK: any;
   photo: string;
   form: FormGroup;
   submitted = false;
   skills: string[] = [];
+
+  constructor(
+    public modalController: ModalController,
+    public fb: FormBuilder,
+    public db: DatabaseService
+  ) {
+    this.form = this.fb.group({
+      name: [null, [Validators.required, Validators.minLength(4)]],
+      gender: [null, Validators.required],
+      dob: [null, Validators.required],
+      permanentAddress: [null, Validators.required],
+      temporaryAddress: [null],
+      skills: this.fb.array([]),
+    });
+  }
+
+  ngOnInit() {
+    setInterval(() => {
+      console.log('running');
+      this.photo = this.db.getImg();
+    }, 4000);
+  }
+
   addingSkills(event) {
     //formArray formControllName
     this.skills.push(event.target.value);
@@ -32,21 +55,6 @@ export class SignUpPage implements OnInit {
   resetForm() {
     this.form.reset();
     this.skills = [];
-  }
-  constructor(
-    public modalController: ModalController,
-    public setImagePopup: SetimagePopupPage,
-    public fb: FormBuilder,
-    public db: DatabaseService
-  ) {
-    this.form = this.fb.group({
-      name: [null, [Validators.required, Validators.minLength(4)]],
-      gender: [null, Validators.required],
-      dob: [null, Validators.required],
-      permanentAddress: [null, Validators.required],
-      temporaryAddress: [null],
-      skills: this.fb.array([]),
-    });
   }
 
   saveFormData(form: FormGroup) {
@@ -65,7 +73,7 @@ export class SignUpPage implements OnInit {
 
   async openModal() {
     const modal = await this.modalController.create({
-      component: SetimagePopupPage,
+      component: PopupPage,
       componentProps: {
         name: 'Form',
         type: 'modal',
@@ -75,6 +83,7 @@ export class SignUpPage implements OnInit {
     return await modal.present();
   }
 
+  //SQLite methods
   showUsers() {
     this.db.getAllusers();
   }
@@ -99,12 +108,5 @@ export class SignUpPage implements OnInit {
 
   dropTable() {
     this.db.dropDatabase();
-  }
-
-  ngOnInit() {
-    setInterval(() => {
-      console.log('running');
-      this.photo = this.db.getImg();
-    }, 4000);
   }
 }

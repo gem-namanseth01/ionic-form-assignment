@@ -5,11 +5,11 @@ import { File } from '@ionic-native/file/ngx';
 import { DatabaseService } from '../database.service';
 
 @Component({
-  selector: 'app-setimage-popup',
-  templateUrl: './setimage-popup.page.html',
-  styleUrls: ['./setimage-popup.page.scss'],
+  selector: 'app-popup',
+  templateUrl: './popup.page.html',
+  styleUrls: ['./popup.page.scss'],
 })
-export class SetimagePopupPage implements OnInit {
+export class PopupPage implements OnInit {
   base64Image: string;
   @Input() name: string;
   @Input() type: string;

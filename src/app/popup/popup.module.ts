@@ -4,16 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SetimagePopupPageRoutingModule } from './setimage-popup-routing.module';
-import { SetimagePopupPage } from './setimage-popup.page';
+import { PopupPageRoutingModule } from './popup-routing.module';
+
+import { PopupPage } from './popup.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SetimagePopupPageRoutingModule,
+    PopupPageRoutingModule
   ],
-  declarations: [SetimagePopupPage]
+  declarations: [PopupPage]
 })
-export class SetimagePopupPageModule {}
+export class PopupPageModule {}

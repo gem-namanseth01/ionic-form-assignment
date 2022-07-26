@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'sign-up',
-    pathMatch: 'full'
+    redirectTo: 'registration',
+    pathMatch: 'full',
   },
   {
-    path: 'sign-up',
-    loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
-  },
-  {
-    path: 'setimage-popup',
-    loadChildren: () => import('./setimage-popup/setimage-popup.module').then( m => m.SetimagePopupPageModule)
+    path: 'registration',
+    loadChildren: () =>
+      import('./registration/registration.module').then(
+        (m) => m.RegistrationPageModule
+      ),
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

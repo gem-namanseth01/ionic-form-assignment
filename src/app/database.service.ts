@@ -120,6 +120,7 @@ export class DatabaseService {
     this.databaseConnection();
   }
 
+  //methods to display profile image
   setImg(imgName) {
     this.img = imgName;
   }
