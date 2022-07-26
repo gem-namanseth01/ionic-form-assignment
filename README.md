@@ -6,3 +6,7 @@ Ionic supports Angular 6.0.0 and up. As part of their upgrade strategy, Angular 
 
 # Angular Tooling​
 With Ionic 4+, the official Angular stack for building an app and routing are used, so your app can fall in-line with the rest of the great Angular ecosystem. In cases where more opinionated features are needed, Ionic provides @ionic/angular-toolkit, which builds and integrates with the official Angular CLI and provides features that are specific to @ionic/angular apps.
+ 
+
+ # Visit
+https://ionicframework.com/docs/angular/overview
